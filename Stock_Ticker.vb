@@ -1,18 +1,18 @@
 
 Sub Ticker()
 
-' Dim ws as Worksheet
+Dim ws As Worksheet
 
 For Each ws In Worksheets
 
-' ws.select
+ws.Select
 
     Dim Last_Row, Vol_Row, Results_Last_Row As Integer
     Dim stock, Stk_Inc, Stk_Dec, Stk_Vol As String
     Dim Volume, Stk_Open, Stk_Close, Percent_Chg, Yearly_Chg, Greatest_Inc, Greatest_Dec, Greatest_Vol As Double
 
     Last_Row = Cells(Rows.Count, "A").End(xlUp).Row             ' Easy Level. Finds last row for initial spreadsheet.
-    Results_Last_Row = Cells(Rows.Count, "I").End(xlUp).Row     ' Hard Level. Finds last row of the moderate-level output.
+   
     Vol_Row = 2                                                 ' Easy Level. We need to start on the second row to avoid header.
     Volume = 0
     Greatest_Inc = 0
@@ -27,16 +27,9 @@ For Each ws In Worksheets
     Columns("K:K").EntireColumn.AutoFit
     Cells(1, 12) = "Total Stock Volume"         ' Moderate Level
     Columns("L:L").EntireColumn.AutoFit
-    Columns("O:O").EntireColumn.AutoFit
-    Range("O2") = "Greatest % Increase"         ' Hard Level
-    Range("O3") = "Greatest % Decrease"         ' Hard Level
-    Range("O4") = "Greatest Total Volume"       ' Hard Level
-    Cells(1, 16) = "Ticker"                     ' Hard Level
-    Columns("P:P").EntireColumn.AutoFit
-    Cells(1, 17) = "Value"                      ' Hard Level
-    Columns("Q:Q").EntireColumn.AutoFit
+    
 
-    Stk_Open = Cells(2, 3)  ' Easy Level. Initial stock opening price on each worksheet.
+    Stk_Open = Cells(2, 3)  ' Moderate Level. Initial stock opening price on each worksheet.
 
 
     For i = 2 To Last_Row + 1                                   ' Easy Level. Runs one row past the last row for comparison purposes.
@@ -80,10 +73,14 @@ For Each ws In Worksheets
 
     Next i
 
-    For i = 2 to Results_Last_Row                   ' Difficult Level. Only examines the rows of output created in earlier For loop.
+i = 2
+Results_Last_Row = Cells(Rows.Count, "I").End(xlUp).Row     ' Hard Level. Finds last row of the moderate-level output.
 
-        If Cells(i, 11).Value > Greatest_Inc Then   ' Difficult Level. Compares Percent Change (put in Greatest_Inc variable) and overwrites 
-            Greatest_Inc = Cells(i, 11).Value       ' variable whenever the Percent Change is higher than value already in the variable. 
+
+    For i = 2 To Results_Last_Row                   ' Difficult Level. Only examines the rows of output created in earlier For loop.
+
+        If Cells(i, 11).Value > Greatest_Inc Then   ' Difficult Level. Compares Percent Change (put in Greatest_Inc variable) and overwrites
+            Greatest_Inc = Cells(i, 11).Value       ' variable whenever the Percent Change is higher than value already in the variable.
             Stk_Inc = Cells(i, 9).Value             ' Difficult Level. Pulls the Ticker name whenever Greatest_Inc is overwritten.
         End If
 
@@ -95,20 +92,29 @@ For Each ws In Worksheets
         If Cells(i, 12).Value > Greatest_Vol Then   ' Difficult Level. Compares each row of Volume and overwrites Greatest_Vol variable whenever
             Greatest_Vol = Cells(i, 12).Value       ' Volume is larger than the value already in the variable.
             Stk_Vol = Cells(i, 9).Value             ' Difficult Level. Pulls the Ticker name whenever Greatest_Vol is overwritten.
-        End If  
+        End If
     
-    Next i 
+    Next i
 
-    Range("P2") = Stk_Inc                           ' Difficult Level. Outputs data for the small table to the right.
-    Range("Q2") = Greatest_Inc
-    Range("P3") = Stk_Dec
-    Range("Q3") = Greatest_Dec
-    Range("P4") = Stk_Vol
-    Range("Q4") = Greatest_Vol
+    ws.Range("P2") = Stk_Inc                           ' Difficult Level. Outputs data for the small table to the right.
+    ws.Range("Q2") = Greatest_Inc
+    ws.Range("P3") = Stk_Dec
+    ws.Range("Q3") = Greatest_Dec
+    ws.Range("P4") = Stk_Vol
+    ws.Range("Q4") = Greatest_Vol
 
-    Range("Q2:Q3").NumberFormat = "0.00%"
+    ws.Range("Q2:Q3").NumberFormat = "0.00%"
+    Columns("O:O").EntireColumn.AutoFit
+    Range("O2") = "Greatest % Increase"         ' Hard Level
+    Range("O3") = "Greatest % Decrease"         ' Hard Level
+    Range("O4") = "Greatest Total Volume"       ' Hard Level
+    Cells(1, 16) = "Ticker"                     ' Hard Level
+    Columns("P:P").EntireColumn.AutoFit
+    Cells(1, 17) = "Value"                      ' Hard Level
+    Columns("Q:Q").EntireColumn.AutoFit
 
 Next ws
 
 End Sub
+
 
