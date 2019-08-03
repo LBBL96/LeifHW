@@ -104,10 +104,10 @@ Results_Last_Row = Cells(Rows.Count, "I").End(xlUp).Row     ' Hard Level. Finds 
     ws.Range("Q4") = Greatest_Vol
 
     ws.Range("Q2:Q3").NumberFormat = "0.00%"
-    Columns("O:O").EntireColumn.AutoFit
     Range("O2") = "Greatest % Increase"         ' Hard Level
     Range("O3") = "Greatest % Decrease"         ' Hard Level
     Range("O4") = "Greatest Total Volume"       ' Hard Level
+    Columns("O:O").EntireColumn.AutoFit
     Cells(1, 16) = "Ticker"                     ' Hard Level
     Columns("P:P").EntireColumn.AutoFit
     Cells(1, 17) = "Value"                      ' Hard Level
